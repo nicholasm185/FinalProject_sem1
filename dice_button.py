@@ -6,6 +6,7 @@ class Dice():
         self.screen = screen
         self.screen_rect = screen.get_rect()
 
+        self.dieface0 = pygame.image.load(".\\assets\\dieinit.png")
         self.dieface1 = pygame.image.load(".\\assets\\dicefaces-01.png")
         self.dieface2 = pygame.image.load(".\\assets\\dicefaces-02.png")
         self.dieface3 = pygame.image.load(".\\assets\\dicefaces-03.png")
@@ -21,7 +22,9 @@ class Dice():
 
     def drawButton(self, pion):
         self.screen.fill(self.buttonColor, self.rect)
-        if pion.adder == 1:
+        if pion.adder == 0:
+            self.screen.blit(self.dieface0, (650, 100))
+        elif pion.adder == 1:
             self.screen.blit(self.dieface1, (650, 100))
         elif pion.adder == 2:
             self.screen.blit(self.dieface2, (650, 100))

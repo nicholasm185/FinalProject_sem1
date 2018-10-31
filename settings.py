@@ -5,8 +5,6 @@ class Setting():
         self.gameboard = ".\\assets\\ludoladdersboard.png"
         self.rollerboard = ".\\assets\\rollerboard.png"
 
-
-
 # Anthony Pham - Stack Overflow
 class Background(pygame.sprite.Sprite):
     def __init__(self, image_file, location):
