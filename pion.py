@@ -42,10 +42,12 @@ class Pion(Sprite):
                     self.changedir()
                     print("moved up")
                     self.position += 1
+                    self.adder -= 1
                 else:
                     self.x += (self.rect.x*self.direction)
                     print("moved")
                     self.position += 1
+                    self.adder -= 1
             self.blitme()
             pygame.display.flip()
             screen.blit(background.image, background.rect)
