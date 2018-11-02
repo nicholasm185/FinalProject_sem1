@@ -5,6 +5,11 @@ class Setting():
         self.gameboard = ".\\assets\\ludoladdersboard.png"
         self.rollerboard = ".\\assets\\rollerboard.png"
 
+        self.blues = ".\\assets\\pionblue-01.png"
+        self.reds = ".\\assets\\pionred-01.png"
+
+        self.player = 1
+
 # Anthony Pham - Stack Overflow
 class Background(pygame.sprite.Sprite):
     def __init__(self, image_file, location):

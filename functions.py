@@ -27,15 +27,16 @@ def update_screen(screen, background, pion, side_panel, dice):
 
     pygame.display.flip()
 
-def init_screen(screen, background, pion, side_panel, dice):
+def init_screen(screen, background, pion1, pion2, side_panel, dice):
 
     screen.fill((255,255,255))
 
     screen.blit(side_panel.image, side_panel.rect)
-    dice.drawButton(pion)
+    dice.drawButton(pion1)
     screen.blit(background.image, background.rect)
 
-    pion.blitme()
+    pion1.blitme()
+    pion2.blitme()
 
     pygame.display.flip()
 

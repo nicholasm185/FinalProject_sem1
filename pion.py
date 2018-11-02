@@ -2,10 +2,11 @@ import pygame
 from pygame.sprite import Sprite
 import time
 import random
+import functions
 
 class Pion(Sprite):
 
-    def __init__(self, screen, setting):
+    def __init__(self, screen, setting, color):
         super(Pion,self).__init__()
         self.screen = screen
 
@@ -13,7 +14,7 @@ class Pion(Sprite):
 
         self.screen_rect = self.screen.get_rect()
 
-        self.image = pygame.image.load(".\\assets\\pion.png")
+        self.image = pygame.image.load(color)
         self.rect = self.image.get_rect()
 
         self.rect.x = self.rect.width
@@ -51,7 +52,7 @@ class Pion(Sprite):
             self.blitme()
             pygame.display.flip()
             screen.blit(background.image, background.rect)
-            time.sleep(0.1)
+            time.sleep(0.05)
 
 
         # to do: handle overflow
