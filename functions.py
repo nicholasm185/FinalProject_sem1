@@ -25,6 +25,9 @@ def update_screen(screen, background, pion, side_panel, dice):
     pion.update(screen, background)
     pion.blitme()
 
+    pion.checkladderpos(screen, background)
+    pion.blitme()
+
     pygame.display.flip()
 
 def init_screen(screen, background, pion1, pion2, side_panel, dice):
@@ -49,3 +52,6 @@ def roller_clicked(screen, background, pion, side_panel, dice, mouse_x, mouse_y)
     button_clicked = dice.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked:
         update_screen(screen, background, pion, side_panel, dice)
+
+def debugmode(pion):
+    pion.position = int(input(""))

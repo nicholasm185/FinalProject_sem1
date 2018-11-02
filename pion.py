@@ -49,14 +49,12 @@ class Pion(Sprite):
                     print("moved")
                     self.position += 1
                     self.adder -= 1
+
             self.blitme()
             pygame.display.flip()
             screen.blit(background.image, background.rect)
             time.sleep(0.05)
 
-
-        # to do: handle overflow
-        # self.position += self.adder
         print(self.adder)
         print(self.position)
         print(self.x)
@@ -76,3 +74,53 @@ class Pion(Sprite):
 
     def changedir(self):
         self.direction *= -1
+
+    def checkladderpos(self, screen, background):
+        if self.position == 2:
+            self.x = 120
+            self.y = 360
+            self.position = 38
+            self.changedir()
+            self.blitme()
+            pygame.display.flip()
+            screen.blit(background.image, background.rect)
+        elif self.position == 4:
+            self.x = 360
+            self.y = 480
+            self.position = 14
+            self.changedir()
+            self.blitme()
+            pygame.display.flip()
+            screen.blit(background.image, background.rect)
+        elif self.position == 9:
+            self.x = 540
+            self.y = 360
+            self.position = 31
+            self.changedir()
+            self.blitme()
+            pygame.display.flip()
+            screen.blit(background.image, background.rect)
+        elif self.position == 33:
+            self.x = 240
+            self.y = 60
+            self.position = 85
+            self.changedir()
+            self.blitme()
+            pygame.display.flip()
+            screen.blit(background.image, background.rect)
+        elif self.position == 52:
+            self.x = 420
+            self.y = 60
+            self.position = 88
+            self.changedir()
+            self.blitme()
+            pygame.display.flip()
+            screen.blit(background.image, background.rect)
+        elif self.position == 80:
+            self.x = 60
+            self.y = 0
+            self.position = 99
+            self.changedir()
+            self.blitme()
+            pygame.display.flip()
+            screen.blit(background.image, background.rect)
