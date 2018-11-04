@@ -21,9 +21,9 @@ def ludoLadders():
     color1 = setting.blues
     color2 = setting.reds
 
-    background = Background(gameboard, [0,0])
-    side_panel = Background(rollerboard, [599,0])
-    screen = py.display.set_mode((900,600))
+    background = Background(gameboard, [0, 0])
+    side_panel = Background(rollerboard, [599, 0])
+    screen = py.display.set_mode((900, 600))
 
     dice = Dice(screen)
 
@@ -38,17 +38,17 @@ def ludoLadders():
 
     while True:
         if player == 1:
-            if func.check_events(screen, background, pion1, side_panel, dice):
+            if func.check_events(screen, background, pion1, side_panel, dice, pion2):
                 player *= -1
-            pion2.blitme()
-            pygame.display.flip()
-            func.checkwin(pion1)
+            func.checkwin(pion1, "Blue Wins!")
         if player == -1:
-            if func.check_events(screen, background, pion2, side_panel, dice):
+            if func.check_events(screen, background, pion2, side_panel, dice, pion1):
                 player *= -1
-            pion1.blitme()
-            pygame.display.flip()
-            func.checkwin(pion2)
+            func.checkwin(pion2, "Red Wins! ")
+        pion1.blitme()
+        pion2.blitme()
+        pygame.display.flip()
+
 
 
 ludoLadders()

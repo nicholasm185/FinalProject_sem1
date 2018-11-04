@@ -29,35 +29,41 @@ class Pion(Sprite):
 
         self.adder = 0
 
+        self.playstatus = False
+
     def roll(self):
         self.adder = random.randint(1,6)
 
-    def update(self, screen, background):
-        for i in range(0, self.adder):
-            if self.position + self.adder > 100:
-                print("break")
-                break
-            else:
-                if self.check_out():
-                    self.y -= self.rect.y
-                    self.changedir()
-                    print("moved up")
-                    self.position += 1
-                    self.adder -= 1
+    def update(self, screen, background, rivalpion):
+        if self.playstatus == True:
+            for i in range(0, self.adder):
+                if self.position + self.adder > 100:
+                    print("break")
+                    break
                 else:
-                    self.x += (self.rect.x*self.direction)
-                    print("moved")
-                    self.position += 1
-                    self.adder -= 1
+                    if self.check_out():
+                        self.y -= self.rect.y
+                        self.changedir()
+                        print("moved up")
+                        self.position += 1
+                        self.adder -= 1
+                    else:
+                        self.x += (self.rect.x*self.direction)
+                        print("moved")
+                        self.position += 1
+                        self.adder -= 1
 
-            self.blitme()
-            pygame.display.flip()
-            screen.blit(background.image, background.rect)
-            time.sleep(0.05)
+                self.blitme()
+                rivalpion.blitme()
+                pygame.display.flip()
+                screen.blit(background.image, background.rect)
+                time.sleep(0.05)
 
-        print(self.adder)
-        print(self.position)
-        print(self.x)
+            print(self.adder)
+            print(self.position)
+            print(self.x)
+        elif self.playstatus == False and self.adder == 6:
+            self.change_state()
 
     def blitme(self):
         self.screen.blit(self.image, (self.x, self.y))
@@ -74,6 +80,18 @@ class Pion(Sprite):
 
     def changedir(self):
         self.direction *= -1
+
+    def put_in_base(self, baseX, baseY):
+        self.x = baseX
+        self.y = baseY
+        self.screen.blit(self.image, (700,500))
+
+    def change_state(self):
+        if self.adder == 6:
+            self.playstatus = True
+            self.x = 0
+            self.y = 540
+            self.position = 1
 
     def checkladderpos(self, screen, background):
         if self.position == 2:

@@ -3,16 +3,16 @@ import pygame
 from dice_button import Dice
 from settings import Setting
 
-def check_events(screen, background, pion, side_panel, dice):
+def check_events(screen, background, pion, side_panel, dice, rivalpion):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            roller_clicked(screen, background, pion, side_panel, dice, mouse_x, mouse_y)
+            roller_clicked(screen, background, pion, rivalpion, side_panel, dice, mouse_x, mouse_y)
             return True
 
-def update_screen(screen, background, pion, side_panel, dice):
+def update_screen(screen, background, pion, side_panel, dice, rivalpion):
 
     screen.fill((255,255,255))
 
@@ -22,11 +22,9 @@ def update_screen(screen, background, pion, side_panel, dice):
     dice.drawButton(pion)
     screen.blit(background.image, background.rect)
 
-    pion.update(screen, background)
-    pion.blitme()
+    pion.update(screen, background, rivalpion)
 
     pion.checkladderpos(screen, background)
-    pion.blitme()
 
     pygame.display.flip()
 
@@ -38,20 +36,20 @@ def init_screen(screen, background, pion1, pion2, side_panel, dice):
     dice.drawButton(pion1)
     screen.blit(background.image, background.rect)
 
-    pion1.blitme()
-    pion2.blitme()
+    pion1.put_in_base(700, 440)
+    pion2.put_in_base(700, 500)
 
     pygame.display.flip()
 
-def checkwin(pion):
+def checkwin(pion, msg):
     if pion.position == 100:
-        print("you win!")
+        print(msg)
         sys.exit()
 
-def roller_clicked(screen, background, pion, side_panel, dice, mouse_x, mouse_y):
+def roller_clicked(screen, background, pion, rivalpion, side_panel, dice, mouse_x, mouse_y):
     button_clicked = dice.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked:
-        update_screen(screen, background, pion, side_panel, dice)
+        update_screen(screen, background, pion, side_panel, dice, rivalpion)
 
 def debugmode(pion):
     pion.position = int(input(""))
