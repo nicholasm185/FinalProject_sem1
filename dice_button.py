@@ -15,7 +15,7 @@ class Dice():
         self.dieface6 = pygame.image.load(".\\assets\\dicefaces-06.png")
 
         self.width, self.height = 200, 200
-        self.buttonColor = (0, 255, 0)
+        self.buttonColor = (255, 255, 255)
 
         self.rect = pygame.Rect(650, 100, self.width, self.height)
         # self.rect.center = self.screen_rect.center

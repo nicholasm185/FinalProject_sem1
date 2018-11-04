@@ -84,7 +84,7 @@ class Pion(Sprite):
     def put_in_base(self, baseX, baseY):
         self.x = baseX
         self.y = baseY
-        self.screen.blit(self.image, (700,500))
+        self.screen.blit(self.image, (baseX, baseY))
 
     def change_state(self):
         if self.adder == 6:
@@ -92,6 +92,14 @@ class Pion(Sprite):
             self.x = 0
             self.y = 540
             self.position = 1
+
+    # def choose_pion(self):
+    #     for event in pygame.event.get():
+    #         if event.type == pygame.MOUSEBUTTONDOWN:
+    #             mouse_x, mouse_y = pygame.mouse.get_pos()
+    #             pion_clicked = self.rect.collidepoint(mouse_x, mouse_y)
+    #             if pion_clicked:
+    #                 self.choose_pion()
 
     def checkladderpos(self, screen, background):
         if self.position == 2:
