@@ -9,8 +9,8 @@ def check_events(screen, background, pion, side_panel, dice, rivalpion):
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            roller_clicked(screen, background, pion, rivalpion, side_panel, dice, mouse_x, mouse_y)
-            return True
+            if roller_clicked(screen, background, pion, rivalpion, side_panel, dice, mouse_x, mouse_y):
+                return True
 
 def update_screen(screen, background, pion, side_panel, dice, rivalpion):
 
@@ -52,6 +52,7 @@ def roller_clicked(screen, background, pion, rivalpion, side_panel, dice, mouse_
     button_clicked = dice.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked:
         update_screen(screen, background, pion, side_panel, dice, rivalpion)
+        return True
 
 def debugmode(pion):
     pion.position = int(input(""))

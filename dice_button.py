@@ -17,7 +17,10 @@ class Dice():
         self.width, self.height = 200, 200
         self.buttonColor = (255, 255, 255)
 
-        self.rect = pygame.Rect(650, 100, self.width, self.height)
+        self.x = 650
+        self.y = 100
+
+        self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
         # self.rect.center = self.screen_rect.center
 
     def drawButton(self, pion):
