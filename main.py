@@ -7,6 +7,7 @@ import functions as func
 import time
 import os
 import pygame
+from turnbox import Turnbox
 
 # Set where the pygame window opens
 os.environ['SDL_VIDEO_WINDOW_POS'] = "150,50"
@@ -15,15 +16,17 @@ def ludoLadders():
     py.init()
 
     setting = Setting()
+    screen = py.display.set_mode((900, 600))
+
     gameboard = setting.gameboard
     rollerboard = setting.rollerboard
+    turnbox = Turnbox(screen, "Blue goes first!")
 
     color1 = setting.blues
     color2 = setting.reds
 
     background = Background(gameboard, [0, 0])
     side_panel = Background(rollerboard, [599, 0])
-    screen = py.display.set_mode((900, 600))
 
     dice = Dice(screen)
 
@@ -32,16 +35,20 @@ def ludoLadders():
 
     py.display.set_caption("Luddo Ladders")
 
-    func.init_screen(screen, background, pion1, pion2, side_panel, dice)
+    func.init_screen(screen, background, pion1, pion2, side_panel, dice, turnbox)
 
     player = 1
 
     while True:
         if player == 1:
+            turnbox.turn_initiator("Blue's turn!")
+            turnbox.draw_turnbox()
             if func.check_events(screen, background, pion1, side_panel, dice, pion2):
                 player *= -1
             func.checkwin(pion1, "Blue Wins!")
         if player == -1:
+            turnbox.turn_initiator("Red's turn!")
+            turnbox.draw_turnbox()
             if func.check_events(screen, background, pion2, side_panel, dice, pion1):
                 player *= -1
             func.checkwin(pion2, "Red Wins! ")

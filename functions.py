@@ -28,9 +28,11 @@ def update_screen(screen, background, pion, side_panel, dice, rivalpion):
 
     pygame.display.flip()
 
-def init_screen(screen, background, pion1, pion2, side_panel, dice):
+def init_screen(screen, background, pion1, pion2, side_panel, dice, turnbox):
 
     screen.fill((255,255,255))
+
+    turnbox.draw_turnbox()
 
     screen.blit(side_panel.image, side_panel.rect)
     dice.drawButton(pion1)

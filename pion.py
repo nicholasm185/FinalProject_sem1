@@ -57,7 +57,7 @@ class Pion(Sprite):
                 rivalpion.blitme()
                 pygame.display.flip()
                 screen.blit(background.image, background.rect)
-                time.sleep(0.05)
+                time.sleep(0.1)
 
             print(self.adder)
             print(self.position)
