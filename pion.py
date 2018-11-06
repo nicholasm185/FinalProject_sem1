@@ -31,6 +31,8 @@ class Pion(Sprite):
 
         self.playstatus = False
 
+        self.click_position = pygame.Rect(self.x, self.y, self.rect.x, self.rect.y)
+
     def roll(self):
         self.adder = random.randint(1,6)
 
@@ -59,6 +61,7 @@ class Pion(Sprite):
                 screen.blit(background.image, background.rect)
                 time.sleep(0.1)
 
+            self.click_position = pygame.Rect(self.x, self.y, self.rect.x, self.rect.y)
             print(self.adder)
             print(self.position)
             print(self.x)
@@ -84,6 +87,7 @@ class Pion(Sprite):
     def put_in_base(self, baseX, baseY):
         self.x = baseX
         self.y = baseY
+        self.click_position = pygame.Rect(self.x, self.y, self.rect.x, self.rect.y)
         self.screen.blit(self.image, (baseX, baseY))
 
     def change_state(self):

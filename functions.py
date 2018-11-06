@@ -12,6 +12,20 @@ def check_events(screen, background, pion, side_panel, dice, rivalpion):
             if roller_clicked(screen, background, pion, rivalpion, side_panel, dice, mouse_x, mouse_y):
                 return True
 
+def which_pion(pion1, pion2):
+    for event in pygame.event.wait():
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            pion_clicked(pion1, pion2, mouse_x, mouse_y)
+
+def pion_clicked(pion1, pion2, mouse_x, mouse_y):
+    pion1_clicked = pion1.click_position.collidepoint(mouse_x, mouse_y)
+    pion2_clicked = pion2.click_position.collidepoint(mouse_x, mouse_y)
+    if pion1_clicked:
+        return("Pion1 clicked")
+    elif pion2_clicked:
+        return("Pion2 clicked")
+
 def update_screen(screen, background, pion, side_panel, dice, rivalpion):
 
     screen.fill((255,255,255))
@@ -51,7 +65,6 @@ def checkwin(pion, msg):
 def roller_clicked(screen, background, pion, rivalpion, side_panel, dice, mouse_x, mouse_y):
     button_clicked = dice.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked:
-        update_screen(screen, background, pion, side_panel, dice, rivalpion)
         return True
 
 def debugmode(pion):

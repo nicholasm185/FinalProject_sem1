@@ -44,12 +44,28 @@ def ludoLadders():
             turnbox.turn_initiator("Blue's turn!")
             turnbox.draw_turnbox()
             if func.check_events(screen, background, pion1, side_panel, dice, pion2):
+                # works for now, needs to simplify and change to mouse click and add indicator of choosing which pion to choose!!
+                while True:
+                    event = pygame.event.wait()
+                    if event.type == py.KEYDOWN:
+                        if event.key == py.K_f:
+                            print("pressed")
+                            break
+                func.update_screen(screen, background, pion1, side_panel, dice, pion2)
                 player *= -1
             func.checkwin(pion1, "Blue Wins!")
         if player == -1:
             turnbox.turn_initiator("Red's turn!")
             turnbox.draw_turnbox()
             if func.check_events(screen, background, pion2, side_panel, dice, pion1):
+                # works for now, needs to simplify and change to mouse click and add indicator of choosing which pion to choose!!
+                while True:
+                    event = pygame.event.wait()
+                    if event.type == py.KEYDOWN:
+                        if event.key == py.K_d:
+                            print("pressed")
+                            break
+                func.update_screen(screen, background, pion2, side_panel, dice, pion1)
                 player *= -1
             func.checkwin(pion2, "Red Wins! ")
         pion1.blitme()
