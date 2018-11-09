@@ -3,13 +3,13 @@ import pygame
 from dice_button import Dice
 from settings import Setting
 
-def check_events(screen, background, pion, side_panel, dice, rivalpion):
+def check_events(dice):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            if roller_clicked(screen, background, pion, rivalpion, side_panel, dice, mouse_x, mouse_y):
+            if roller_clicked(dice, mouse_x, mouse_y):
                 return True
 
 def which_pion(pion1, pion2):
@@ -30,10 +30,12 @@ def update_screen(screen, background, pion, side_panel, dice, rivalpion):
 
     screen.fill((255,255,255))
 
-    pion.roll()
+    pion.adder = dice.value
 
     screen.blit(side_panel.image, side_panel.rect)
-    dice.drawButton(pion)
+
+    dice.draw_dice()
+
     screen.blit(background.image, background.rect)
 
     pion.update(screen, background, rivalpion)
@@ -49,7 +51,7 @@ def init_screen(screen, background, pion1, pion2, side_panel, dice, turnbox):
     turnbox.draw_turnbox()
 
     screen.blit(side_panel.image, side_panel.rect)
-    dice.drawButton(pion1)
+    dice.draw_dice()
     screen.blit(background.image, background.rect)
 
     pion1.put_in_base(700, 440)
@@ -57,12 +59,17 @@ def init_screen(screen, background, pion1, pion2, side_panel, dice, turnbox):
 
     pygame.display.flip()
 
+def dice_roll(dice):
+    dice.roll_dice()
+    dice.draw_dice()
+    pygame.display.flip()
+
 def checkwin(pion, msg):
     if pion.position == 100:
         print(msg)
         sys.exit()
 
-def roller_clicked(screen, background, pion, rivalpion, side_panel, dice, mouse_x, mouse_y):
+def roller_clicked(dice, mouse_x, mouse_y):
     button_clicked = dice.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked:
         return True

@@ -1,4 +1,5 @@
 import pygame.font
+import random
 
 class Dice():
 
@@ -17,25 +18,30 @@ class Dice():
         self.width, self.height = 200, 200
         self.buttonColor = (255, 255, 255)
 
+        self.value = 0
+
         self.x = 650
         self.y = 100
 
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
         # self.rect.center = self.screen_rect.center
 
-    def drawButton(self, pion):
+    def roll_dice(self):
+        self.value = random.randint(1, 6)
+
+    def draw_dice(self):
         self.screen.fill(self.buttonColor, self.rect)
-        if pion.adder == 0:
+        if self.value == 0:
             self.screen.blit(self.dieface0, (650, 100))
-        elif pion.adder == 1:
+        elif self.value == 1:
             self.screen.blit(self.dieface1, (650, 100))
-        elif pion.adder == 2:
+        elif self.value == 2:
             self.screen.blit(self.dieface2, (650, 100))
-        elif pion.adder == 3:
+        elif self.value == 3:
             self.screen.blit(self.dieface3, (650, 100))
-        elif pion.adder == 4:
+        elif self.value == 4:
             self.screen.blit(self.dieface4, (650, 100))
-        elif pion.adder == 5:
+        elif self.value == 5:
             self.screen.blit(self.dieface5, (650, 100))
-        elif pion.adder == 6:
+        elif self.value == 6:
             self.screen.blit(self.dieface6, (650, 100))

@@ -43,7 +43,8 @@ def ludoLadders():
         if player == 1:
             turnbox.turn_initiator("Blue's turn!")
             turnbox.draw_turnbox()
-            if func.check_events(screen, background, pion1, side_panel, dice, pion2):
+            if func.check_events(dice):
+                func.dice_roll(dice)
                 # works for now, needs to simplify and change to mouse click and add indicator of choosing which pion to choose!!
                 while True:
                     event = pygame.event.wait()
@@ -57,7 +58,8 @@ def ludoLadders():
         if player == -1:
             turnbox.turn_initiator("Red's turn!")
             turnbox.draw_turnbox()
-            if func.check_events(screen, background, pion2, side_panel, dice, pion1):
+            if func.check_events(dice):
+                func.dice_roll(dice)
                 # works for now, needs to simplify and change to mouse click and add indicator of choosing which pion to choose!!
                 while True:
                     event = pygame.event.wait()
