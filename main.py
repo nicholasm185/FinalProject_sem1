@@ -6,7 +6,6 @@ from dice_button import Dice
 import functions as func
 import time
 import os
-import pygame
 from turnbox import Turnbox
 
 # Set where the pygame window opens
@@ -47,12 +46,11 @@ def ludoLadders():
                 func.dice_roll(dice)
                 # works for now, needs to simplify and change to mouse click and add indicator of choosing which pion to choose!!
                 while True:
-                    event = pygame.event.wait()
-                    if event.type == py.KEYDOWN:
-                        if event.key == py.K_f:
-                            print("pressed")
+                    event = py.event.wait()
+                    if event.type == py.MOUSEBUTTONDOWN:
+                        if func.which_pion(pion1, pion2) == "Pion1 clicked":
+                            func.update_screen(screen, background, pion1, side_panel, dice, pion2)
                             break
-                func.update_screen(screen, background, pion1, side_panel, dice, pion2)
                 player *= -1
             func.checkwin(pion1, "Blue Wins!")
         if player == -1:
@@ -62,17 +60,16 @@ def ludoLadders():
                 func.dice_roll(dice)
                 # works for now, needs to simplify and change to mouse click and add indicator of choosing which pion to choose!!
                 while True:
-                    event = pygame.event.wait()
-                    if event.type == py.KEYDOWN:
-                        if event.key == py.K_d:
-                            print("pressed")
+                    event = py.event.wait()
+                    if event.type == py.MOUSEBUTTONDOWN:
+                        if func.which_pion(pion1, pion2) == "Pion2 clicked":
+                            func.update_screen(screen, background, pion2, side_panel, dice, pion1)
                             break
-                func.update_screen(screen, background, pion2, side_panel, dice, pion1)
                 player *= -1
             func.checkwin(pion2, "Red Wins! ")
         pion1.blitme()
         pion2.blitme()
-        pygame.display.flip()
+        py.display.flip()
 
 
 

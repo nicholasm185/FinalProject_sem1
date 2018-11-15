@@ -7,7 +7,7 @@ import functions
 class Pion(Sprite):
 
     def __init__(self, screen, setting, color):
-        super(Pion,self).__init__()
+        super().__init__()
         self.screen = screen
 
         self.setting = setting
@@ -96,14 +96,7 @@ class Pion(Sprite):
             self.x = 0
             self.y = 540
             self.position = 1
-
-    # def choose_pion(self):
-    #     for event in pygame.event.get():
-    #         if event.type == pygame.MOUSEBUTTONDOWN:
-    #             mouse_x, mouse_y = pygame.mouse.get_pos()
-    #             pion_clicked = self.rect.collidepoint(mouse_x, mouse_y)
-    #             if pion_clicked:
-    #                 self.choose_pion()
+            self.click_position = pygame.Rect(self.x, self.y, self.rect.x, self.rect.y)
 
     def checkladderpos(self, screen, background):
         if self.position == 2:
@@ -154,3 +147,4 @@ class Pion(Sprite):
             self.blitme()
             pygame.display.flip()
             screen.blit(background.image, background.rect)
+        self.click_position = pygame.Rect(self.x, self.y, self.rect.x, self.rect.y)

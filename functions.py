@@ -13,10 +13,8 @@ def check_events(dice):
                 return True
 
 def which_pion(pion1, pion2):
-    for event in pygame.event.wait():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = pygame.mouse.get_pos()
-            pion_clicked(pion1, pion2, mouse_x, mouse_y)
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        return pion_clicked(pion1, pion2, mouse_x, mouse_y)
 
 def pion_clicked(pion1, pion2, mouse_x, mouse_y):
     pion1_clicked = pion1.click_position.collidepoint(mouse_x, mouse_y)
