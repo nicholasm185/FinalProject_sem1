@@ -1,4 +1,5 @@
 import pygame as py
+from pygame.sprite import Group
 from settings import Setting
 from settings import Background
 from pion import Pion
@@ -30,11 +31,24 @@ def ludoLadders():
     dice = Dice(screen)
 
     pion1 = Pion(screen, setting, color1)
-    pion2 = Pion(screen, setting, color2)
+    pion2 = Pion(screen, setting, color1)
+    pion3 = Pion(screen, setting, color1)
+    pion4 = Pion(screen, setting, color1)
+
+    pion5 = Pion(screen, setting, color2)
+    pion6 = Pion(screen, setting, color2)
+    pion7 = Pion(screen, setting, color2)
+    pion8 = Pion(screen, setting, color2)
+
+    blue_pions = Group()
+    red_pions = Group()
+
+    blue_pions.add(pion1,pion2,pion3,pion4)
+    red_pions.add(pion5,pion6,pion7,pion8)
 
     py.display.set_caption("Luddo Ladders")
 
-    func.init_screen(screen, background, pion1, pion2, side_panel, dice, turnbox)
+    func.init_screen(screen, background, blue_pions, red_pions, side_panel, dice, turnbox)
 
     player = 1
 
@@ -44,12 +58,20 @@ def ludoLadders():
             turnbox.draw_turnbox()
             if func.check_events(dice):
                 func.dice_roll(dice)
-                # works for now, needs to simplify and change to mouse click and add indicator of choosing which pion to choose!!
                 while True:
                     event = py.event.wait()
                     if event.type == py.MOUSEBUTTONDOWN:
-                        if func.which_pion(pion1, pion2) == "Pion1 clicked":
-                            func.update_screen(screen, background, pion1, side_panel, dice, pion2)
+                        if func.which_pion(pion1, pion2, pion3, pion4) == "Pion1 clicked":
+                            func.update_screen(screen, background, pion1, side_panel, dice, blue_pions, red_pions)
+                            break
+                        elif func.which_pion(pion1, pion2, pion3, pion4) == "Pion2 clicked":
+                            func.update_screen(screen, background, pion2, side_panel, dice, blue_pions, red_pions)
+                            break
+                        elif func.which_pion(pion1, pion2, pion3, pion4) == "Pion3 clicked":
+                            func.update_screen(screen, background, pion3, side_panel, dice, blue_pions, red_pions)
+                            break
+                        elif func.which_pion(pion1, pion2, pion3, pion4) == "Pion4 clicked":
+                            func.update_screen(screen, background, pion4, side_panel, dice, blue_pions, red_pions)
                             break
                 player *= -1
             func.checkwin(pion1, "Blue Wins!")
@@ -58,19 +80,27 @@ def ludoLadders():
             turnbox.draw_turnbox()
             if func.check_events(dice):
                 func.dice_roll(dice)
-                # works for now, needs to simplify and change to mouse click and add indicator of choosing which pion to choose!!
                 while True:
                     event = py.event.wait()
                     if event.type == py.MOUSEBUTTONDOWN:
-                        if func.which_pion(pion1, pion2) == "Pion2 clicked":
-                            func.update_screen(screen, background, pion2, side_panel, dice, pion1)
+                        if func.which_pion(pion5, pion6, pion7, pion8) == "Pion1 clicked":
+                            func.update_screen(screen, background, pion5, side_panel, dice, red_pions, blue_pions)
+                            break
+                        elif func.which_pion(pion5, pion6, pion7, pion8) == "Pion2 clicked":
+                            func.update_screen(screen, background, pion6, side_panel, dice, blue_pions, red_pions)
+                            break
+                        elif func.which_pion(pion5, pion6, pion7, pion8) == "Pion3 clicked":
+                            func.update_screen(screen, background, pion7, side_panel, dice, blue_pions, red_pions)
+                            break
+                        elif func.which_pion(pion5, pion6, pion7, pion8) == "Pion4 clicked":
+                            func.update_screen(screen, background, pion8, side_panel, dice, blue_pions, red_pions)
                             break
                 player *= -1
             func.checkwin(pion2, "Red Wins! ")
-        pion1.blitme()
-        pion2.blitme()
+        for pion in blue_pions:
+            pion.blitme()
+        for pion in red_pions:
+            pion.blitme()
         py.display.flip()
-
-
 
 ludoLadders()

@@ -36,7 +36,7 @@ class Pion(Sprite):
     def roll(self):
         self.adder = random.randint(1,6)
 
-    def update(self, screen, background, rivalpion):
+    def update(self, screen, background, own_group, rival_group):
         if self.playstatus == True:
             for i in range(0, self.adder):
                 if self.position + self.adder > 100:
@@ -55,8 +55,11 @@ class Pion(Sprite):
                         self.position += 1
                         self.adder -= 1
 
-                self.blitme()
-                rivalpion.blitme()
+                # self.blitme()
+                for pion in own_group:
+                    pion.blitme()
+                for pion in rival_group:
+                    pion.blitme()
                 pygame.display.flip()
                 screen.blit(background.image, background.rect)
                 time.sleep(0.1)
