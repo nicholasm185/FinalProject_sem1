@@ -15,6 +15,7 @@ os.environ['SDL_VIDEO_WINDOW_POS'] = "150,50"
 def ludoLadders():
     py.init()
 
+    #initialize necessary assets for the game
     setting = Setting()
     screen = py.display.set_mode((900, 600))
 
@@ -30,6 +31,7 @@ def ludoLadders():
 
     dice = Dice(screen)
 
+    #initialize pions for each player
     pion1 = Pion(screen, setting, color1)
     pion2 = Pion(screen, setting, color1)
     pion3 = Pion(screen, setting, color1)
@@ -40,9 +42,11 @@ def ludoLadders():
     pion7 = Pion(screen, setting, color2)
     pion8 = Pion(screen, setting, color2)
 
+    #initiate groups for the teams
     blue_pions = Group()
     red_pions = Group()
 
+    #putting each pion to their respective teams
     blue_pions.add(pion1,pion2,pion3,pion4)
     red_pions.add(pion5,pion6,pion7,pion8)
 
@@ -57,7 +61,7 @@ def ludoLadders():
             turnbox.turn_initiator("Blue's turn!")
             turnbox.draw_turnbox()
             if func.check_events(dice):
-                func.dice_roll(dice)
+                func.dice_roll(dice, blue_pions, red_pions)
                 while True:
                     event = py.event.wait()
                     if event.type == py.MOUSEBUTTONDOWN:
@@ -74,12 +78,13 @@ def ludoLadders():
                             func.update_screen(screen, background, pion4, side_panel, dice, blue_pions, red_pions)
                             break
                 player *= -1
-            func.checkwin(pion1, "Blue Wins!")
+            func.remove_pion(blue_pions)
+            func.checkwin(blue_pions, "Blue Wins!")
         if player == -1:
             turnbox.turn_initiator("Red's turn!")
             turnbox.draw_turnbox()
             if func.check_events(dice):
-                func.dice_roll(dice)
+                func.dice_roll(dice, blue_pions, red_pions)
                 while True:
                     event = py.event.wait()
                     if event.type == py.MOUSEBUTTONDOWN:
@@ -96,11 +101,10 @@ def ludoLadders():
                             func.update_screen(screen, background, pion8, side_panel, dice, blue_pions, red_pions)
                             break
                 player *= -1
-            func.checkwin(pion2, "Red Wins! ")
-        for pion in blue_pions:
-            pion.blitme()
-        for pion in red_pions:
-            pion.blitme()
+            func.remove_pion(red_pions)
+            func.checkwin(red_pions, "Red Wins! ")
+        func.draw_pions(blue_pions)
+        func.draw_pions(red_pions)
         py.display.flip()
 
 ludoLadders()

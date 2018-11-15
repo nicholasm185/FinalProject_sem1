@@ -60,6 +60,8 @@ def init_screen(screen, background, blue_pions, red_pions, side_panel, dice, tur
 
     x_blue, y_blue = 640, 440
     x_red, y_red = 640, 500
+
+    # put pions in respective team in their starting positions
     for pion in blue_pions:
         pion.put_in_base(x_blue, y_blue)
         x_blue += 60
@@ -71,13 +73,16 @@ def init_screen(screen, background, blue_pions, red_pions, side_panel, dice, tur
 
     pygame.display.flip()
 
-def dice_roll(dice):
+def dice_roll(dice, team1, team2):
     dice.roll_dice()
     dice.draw_dice()
+    #fix bug of disappearing pions when clicking dice during movement
+    draw_pions(team1)
+    draw_pions(team2)
     pygame.display.flip()
 
-def checkwin(pion, msg):
-    if pion.position == 100:
+def checkwin(team_group, msg):
+    if len(team_group) == 0:
         print(msg)
         sys.exit()
 
@@ -86,5 +91,12 @@ def roller_clicked(dice, mouse_x, mouse_y):
     if button_clicked:
         return True
 
-def debugmode(pion):
-    pion.position = int(input(""))
+def remove_pion(team_group):
+    for pion in team_group:
+        if pion.position == 100:
+            pion.kill()
+            pion.click_position = pygame.Rect(0, 0, 0, 0)
+
+def draw_pions(team_group):
+    for pion in team_group:
+        pion.blitme()
