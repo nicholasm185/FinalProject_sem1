@@ -5,9 +5,9 @@ from settings import Background
 from pion import Pion
 from dice_button import Dice
 import functions as func
-import time
 import os
 from turnbox import Turnbox
+from instruction import Instruction_box
 
 # Set where the pygame window opens
 os.environ['SDL_VIDEO_WINDOW_POS'] = "150,50"
@@ -22,6 +22,7 @@ def ludoLadders():
     gameboard = setting.gameboard
     rollerboard = setting.rollerboard
     turnbox = Turnbox(screen, "Blue goes first!")
+    instruction_box = Instruction_box(screen, "Roll the dice!")
 
     color1 = setting.blues
     color2 = setting.reds
@@ -52,7 +53,7 @@ def ludoLadders():
 
     py.display.set_caption("Luddo Ladders")
 
-    func.init_screen(screen, background, blue_pions, red_pions, side_panel, dice, turnbox)
+    func.init_screen(screen, background, blue_pions, red_pions, side_panel, dice, turnbox, instruction_box)
 
     player = 1
 
@@ -60,22 +61,31 @@ def ludoLadders():
         if player == 1:
             turnbox.turn_initiator("Blue's turn!")
             turnbox.draw_turnbox()
+            instruction_box.instruction_change("Roll the dice!")
+            instruction_box.draw_instruction()
             if func.check_events(dice):
                 func.dice_roll(dice, blue_pions, red_pions)
+                instruction_box.instruction_change("Choose your pion!")
+                instruction_box.draw_instruction()
+                py.display.flip()
                 while True:
                     event = py.event.wait()
                     if event.type == py.MOUSEBUTTONDOWN:
                         if func.which_pion(pion1, pion2, pion3, pion4) == "Pion1 clicked":
                             func.update_screen(screen, background, pion1, side_panel, dice, blue_pions, red_pions)
+                            func.check_eaten(pion1, red_pions)
                             break
                         elif func.which_pion(pion1, pion2, pion3, pion4) == "Pion2 clicked":
                             func.update_screen(screen, background, pion2, side_panel, dice, blue_pions, red_pions)
+                            func.check_eaten(pion2, red_pions)
                             break
                         elif func.which_pion(pion1, pion2, pion3, pion4) == "Pion3 clicked":
                             func.update_screen(screen, background, pion3, side_panel, dice, blue_pions, red_pions)
+                            func.check_eaten(pion3, red_pions)
                             break
                         elif func.which_pion(pion1, pion2, pion3, pion4) == "Pion4 clicked":
                             func.update_screen(screen, background, pion4, side_panel, dice, blue_pions, red_pions)
+                            func.check_eaten(pion4, red_pions)
                             break
                 player *= -1
             func.remove_pion(blue_pions)
@@ -83,22 +93,31 @@ def ludoLadders():
         if player == -1:
             turnbox.turn_initiator("Red's turn!")
             turnbox.draw_turnbox()
+            instruction_box.instruction_change("Roll the dice!")
+            instruction_box.draw_instruction()
             if func.check_events(dice):
                 func.dice_roll(dice, blue_pions, red_pions)
+                instruction_box.instruction_change("Choose your pion!")
+                instruction_box.draw_instruction()
+                py.display.flip()
                 while True:
                     event = py.event.wait()
                     if event.type == py.MOUSEBUTTONDOWN:
                         if func.which_pion(pion5, pion6, pion7, pion8) == "Pion1 clicked":
                             func.update_screen(screen, background, pion5, side_panel, dice, red_pions, blue_pions)
+                            func.check_eaten(pion5, blue_pions)
                             break
                         elif func.which_pion(pion5, pion6, pion7, pion8) == "Pion2 clicked":
                             func.update_screen(screen, background, pion6, side_panel, dice, blue_pions, red_pions)
+                            func.check_eaten(pion6, blue_pions)
                             break
                         elif func.which_pion(pion5, pion6, pion7, pion8) == "Pion3 clicked":
                             func.update_screen(screen, background, pion7, side_panel, dice, blue_pions, red_pions)
+                            func.check_eaten(pion7, blue_pions)
                             break
                         elif func.which_pion(pion5, pion6, pion7, pion8) == "Pion4 clicked":
                             func.update_screen(screen, background, pion8, side_panel, dice, blue_pions, red_pions)
+                            func.check_eaten(pion8, blue_pions)
                             break
                 player *= -1
             func.remove_pion(red_pions)

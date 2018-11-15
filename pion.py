@@ -23,7 +23,10 @@ class Pion(Sprite):
         self.x = 0
         self.y = 540
 
-        self.position = 1
+        self.base_position_x = 0
+        self.base_position_y = 0
+
+        self.position = 0
 
         self.direction = 1
 
@@ -88,6 +91,9 @@ class Pion(Sprite):
         self.direction *= -1
 
     def put_in_base(self, baseX, baseY):
+        self.playstatus = False
+        self.position = 0
+        self.direction = 1
         self.x = baseX
         self.y = baseY
         self.click_position = pygame.Rect(self.x, self.y, self.rect.x, self.rect.y)

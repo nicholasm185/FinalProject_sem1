@@ -1,7 +1,5 @@
 import sys
 import pygame
-from dice_button import Dice
-from settings import Setting
 
 def check_events(dice):
     for event in pygame.event.get():
@@ -12,6 +10,7 @@ def check_events(dice):
             if roller_clicked(dice, mouse_x, mouse_y):
                 return True
 
+#return which pion is clicked to the main, allowing for selection of pion
 def which_pion(pion1, pion2, pion3, pion4):
         mouse_x, mouse_y = pygame.mouse.get_pos()
         return pion_clicked(pion1, pion2, pion3, pion4, mouse_x, mouse_y)
@@ -30,29 +29,25 @@ def pion_clicked(pion1, pion2, pion3, pion4, mouse_x, mouse_y):
     elif pion4_clicked:
         return("Pion4 clicked")
 
+#updates the screen but also starts the pion movement function
 def update_screen(screen, background, pion, side_panel, dice, own_group, rival_group):
 
     screen.fill((255,255,255))
-
     pion.adder = dice.value
-
     screen.blit(side_panel.image, side_panel.rect)
-
     dice.draw_dice()
-
     screen.blit(background.image, background.rect)
-
     pion.update(screen, background, own_group, rival_group)
-
     pion.checkladderpos(screen, background)
 
     pygame.display.flip()
 
-def init_screen(screen, background, blue_pions, red_pions, side_panel, dice, turnbox):
+def init_screen(screen, background, blue_pions, red_pions, side_panel, dice, turnbox, instruction_box):
 
     screen.fill((255,255,255))
 
     turnbox.draw_turnbox()
+    instruction_box.draw_instruction()
 
     screen.blit(side_panel.image, side_panel.rect)
     dice.draw_dice()
@@ -64,39 +59,53 @@ def init_screen(screen, background, blue_pions, red_pions, side_panel, dice, tur
     # put pions in respective team in their starting positions
     for pion in blue_pions:
         pion.put_in_base(x_blue, y_blue)
+        pion.base_position_x = x_blue
+        pion.base_position_y = y_blue
         x_blue += 60
 
     for pion in red_pions:
         pion.put_in_base(x_red, y_red)
+        pion.base_position_x = x_red
+        pion.base_position_y = y_red
         x_red += 60
-
 
     pygame.display.flip()
 
 def dice_roll(dice, team1, team2):
     dice.roll_dice()
     dice.draw_dice()
-    #fix bug of disappearing pions when clicking dice during movement
+    #fixes bug of disappearing pions when clicking dice during movement
     draw_pions(team1)
     draw_pions(team2)
+
     pygame.display.flip()
 
+#checks the contents of each team's groups, winning condition is when the group is empty
 def checkwin(team_group, msg):
     if len(team_group) == 0:
         print(msg)
         sys.exit()
 
+#checks if the roller is clicked
 def roller_clicked(dice, mouse_x, mouse_y):
     button_clicked = dice.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked:
         return True
 
+# put the pion in an untouchable region of the board to avoid unintended selection of pion
 def remove_pion(team_group):
     for pion in team_group:
         if pion.position == 100:
             pion.kill()
             pion.click_position = pygame.Rect(0, 0, 0, 0)
 
+#refractors pion blitting both in other functions as well as in main
 def draw_pions(team_group):
     for pion in team_group:
         pion.blitme()
+
+# returns the eaten pions to their base positions
+def check_eaten(pion, rival_group):
+    for members in rival_group:
+        if members.x == pion.x and members.y == pion.y:
+            members.put_in_base(members.base_position_x, members.base_position_y)

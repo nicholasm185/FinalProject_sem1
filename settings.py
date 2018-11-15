@@ -10,10 +10,9 @@ class Setting():
 
         self.player = 1
 
-        # self.pion1_base = (700, 440)
-        # self.pion2_base = (700, 500)
 
 # Anthony Pham - Stack Overflow with removal of unused "Sprite" class inheritance
+# this class refractors the main function
 class Background():
     def __init__(self, image_file, location):
         self.image = pygame.image.load(image_file)
