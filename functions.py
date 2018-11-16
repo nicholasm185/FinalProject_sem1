@@ -97,7 +97,9 @@ def remove_pion(team_group):
     for pion in team_group:
         if pion.position == 100:
             pion.kill()
-            pion.click_position = pygame.Rect(0, 0, 0, 0)
+            pion.x = -60
+            pion.y = -60
+            pion.click_position = pygame.Rect(-60, -60, 0, 0)
 
 #refractors pion blitting both in other functions as well as in main
 def draw_pions(team_group):
