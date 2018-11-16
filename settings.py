@@ -1,5 +1,6 @@
 import pygame
 
+# this class is used to store the file path of the assets used
 class Setting():
     def __init__(self):
         self.gameboard = ".\\assets\\ludoladdersboard.png"
@@ -8,7 +9,6 @@ class Setting():
         self.blues = ".\\assets\\pionblue-01.png"
         self.reds = ".\\assets\\pionred-01.png"
 
-        self.player = 1
 
 
 # Anthony Pham - Stack Overflow with removal of unused "Sprite" class inheritance

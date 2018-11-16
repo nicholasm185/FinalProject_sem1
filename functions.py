@@ -84,7 +84,7 @@ def dice_roll(dice, team1, team2):
 def checkwin(team_group, msg):
     if len(team_group) == 0:
         print(msg)
-        sys.exit()
+        return True
 
 #checks if the roller is clicked
 def roller_clicked(dice, mouse_x, mouse_y):
@@ -111,3 +111,15 @@ def check_eaten(pion, rival_group):
     for members in rival_group:
         if members.x == pion.x and members.y == pion.y:
             members.put_in_base(members.base_position_x, members.base_position_y)
+
+def which_button(menu):
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        return button_clicked(menu, mouse_x, mouse_y)
+
+def button_clicked(menu, mouse_x, mouse_y):
+    button1 = menu.play_button_rect.collidepoint(mouse_x, mouse_y)
+    button2 = menu.quit_button_rect.collidepoint(mouse_x, mouse_y)
+    if button1:
+        return 1
+    elif button2:
+        return 2
