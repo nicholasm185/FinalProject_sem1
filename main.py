@@ -10,6 +10,8 @@ from turnbox import Turnbox
 from instruction import Instruction_box
 from menu_box import Menu
 import sys
+from winner_indicator import Winner
+
 # Set where the pygame window opens
 os.environ['SDL_VIDEO_WINDOW_POS'] = "150,50"
 
@@ -25,6 +27,7 @@ def ludoLadders():
     menu = Menu(screen)
     turnbox = Turnbox(screen, "")
     instruction_box = Instruction_box(screen, "Roll the dice!")
+    winner = Winner(screen)
 
     color1 = setting.blues
     color2 = setting.reds
@@ -94,6 +97,7 @@ def ludoLadders():
                     player *= -1
                 func.remove_pion(blue_pions)
                 if func.checkwin(blue_pions, "Blue Wins!"):
+                    winner.show_winner("Blue Wins!")
                     game_status = False
 
             elif player == -1:
@@ -128,6 +132,7 @@ def ludoLadders():
                     player *= -1
                 func.remove_pion(red_pions)
                 if func.checkwin(red_pions, "Red Wins! "):
+                    winner.show_winner("Red Wins!")
                     game_status = False
 
             func.draw_pions(blue_pions)
