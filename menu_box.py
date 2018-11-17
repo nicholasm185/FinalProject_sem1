@@ -1,7 +1,7 @@
 import pygame
 
 class Menu:
-    def __init__(self, screen):
+    def __init__(self, screen, setting):
         self.screen = screen
         self.screen_rect = screen.get_rect()
 
@@ -13,6 +13,11 @@ class Menu:
 
         self.rect = pygame.Rect(250, 200, self.width, self.height)
 
+        self.logo_img = setting.logo
+        self.logo = pygame.image.load(self.logo_img)
+        self.logo_rect = self.logo.get_rect()
+        self.logo_rect.center = self.rect.center
+
         self.play_button = self.font.render("Play", True, self.text_color, self.txt_box_color)
         self.play_button_rect = self.play_button.get_rect()
         self.play_button_rect.center = (350, 350)
@@ -23,5 +28,6 @@ class Menu:
 
     def draw_menu(self):
         self.screen.fill(self.box_color, self.rect)
+        self.screen.blit(self.logo, self.logo_rect)
         self.screen.blit(self.play_button, self.play_button_rect)
         self.screen.blit(self.quit_button, self.quit_button_rect)

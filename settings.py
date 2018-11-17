@@ -9,6 +9,8 @@ class Setting():
         self.blues = ".\\assets\\pionblue-01.png"
         self.reds = ".\\assets\\pionred-01.png"
 
+        self.logo = ".\\assets\\ludoladderslogo.png"
+
 
 
 # Anthony Pham - Stack Overflow with removal of unused "Sprite" class inheritance

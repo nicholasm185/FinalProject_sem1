@@ -2,7 +2,6 @@ import pygame
 from pygame.sprite import Sprite
 import time
 import random
-import functions
 
 class Pion(Sprite):
 

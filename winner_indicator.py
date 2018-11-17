@@ -27,4 +27,5 @@ class Winner:
         self.win_box_rect.center = self.rect.center
         self.screen.fill(self.box_color, self.rect)
         self.screen.blit(self.win_box, self.win_box_rect)
+        pygame.display.flip()
         time.sleep(3)

@@ -24,7 +24,7 @@ def ludoLadders():
 
     gameboard = setting.gameboard
     rollerboard = setting.rollerboard
-    menu = Menu(screen)
+    menu = Menu(screen, setting)
     turnbox = Turnbox(screen, "")
     instruction_box = Instruction_box(screen, "Roll the dice!")
     winner = Winner(screen)
