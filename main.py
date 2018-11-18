@@ -38,23 +38,23 @@ def ludoLadders():
     dice = Dice(screen)
 
     #initialize pions for each player
-    pion1 = Pion(screen, setting, color1)
-    pion2 = Pion(screen, setting, color1)
-    pion3 = Pion(screen, setting, color1)
-    pion4 = Pion(screen, setting, color1)
+    pion1 = Pion(screen, color1)
+    pion2 = Pion(screen, color1)
+    pion3 = Pion(screen, color1)
+    pion4 = Pion(screen, color1)
 
-    pion5 = Pion(screen, setting, color2)
-    pion6 = Pion(screen, setting, color2)
-    pion7 = Pion(screen, setting, color2)
-    pion8 = Pion(screen, setting, color2)
+    pion5 = Pion(screen, color2)
+    pion6 = Pion(screen, color2)
+    pion7 = Pion(screen, color2)
+    pion8 = Pion(screen, color2)
 
     #initiate groups for the teams
     blue_pions = Group()
     red_pions = Group()
 
     #putting each pion to their respective teams
-    blue_pions.add(pion1,pion2,pion3,pion4)
-    red_pions.add(pion5,pion6,pion7,pion8)
+    blue_pions.add(pion1, pion2, pion3, pion4)
+    red_pions.add(pion5, pion6, pion7, pion8)
 
     py.display.set_caption("Ludo Ladders")
 

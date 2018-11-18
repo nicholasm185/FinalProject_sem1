@@ -38,7 +38,7 @@ def update_screen(screen, background, pion, side_panel, dice, own_group, rival_g
     dice.draw_dice()
     screen.blit(background.image, background.rect)
     pion.update(screen, background, own_group, rival_group)
-    pion.checkladderpos(screen, background)
+    pion.checkladderpos()
 
     pygame.display.flip()
 
