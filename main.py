@@ -56,7 +56,7 @@ def ludoLadders():
     blue_pions.add(pion1,pion2,pion3,pion4)
     red_pions.add(pion5,pion6,pion7,pion8)
 
-    py.display.set_caption("Luddo Ladders")
+    py.display.set_caption("Ludo Ladders")
 
     func.init_screen(screen, background, blue_pions, red_pions, side_panel, dice, turnbox, instruction_box)
 

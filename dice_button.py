@@ -32,16 +32,16 @@ class Dice():
     def draw_dice(self):
         self.screen.fill(self.buttonColor, self.rect)
         if self.value == 0:
-            self.screen.blit(self.dieface0, (650, 100))
+            self.screen.blit(self.dieface0, (self.x, self.y))
         elif self.value == 1:
-            self.screen.blit(self.dieface1, (650, 100))
+            self.screen.blit(self.dieface1, (self.x, self.y))
         elif self.value == 2:
-            self.screen.blit(self.dieface2, (650, 100))
+            self.screen.blit(self.dieface2, (self.x, self.y))
         elif self.value == 3:
-            self.screen.blit(self.dieface3, (650, 100))
+            self.screen.blit(self.dieface3, (self.x, self.y))
         elif self.value == 4:
-            self.screen.blit(self.dieface4, (650, 100))
+            self.screen.blit(self.dieface4, (self.x, self.y))
         elif self.value == 5:
-            self.screen.blit(self.dieface5, (650, 100))
+            self.screen.blit(self.dieface5, (self.x, self.y))
         elif self.value == 6:
-            self.screen.blit(self.dieface6, (650, 100))
+            self.screen.blit(self.dieface6, (self.x, self.y))
