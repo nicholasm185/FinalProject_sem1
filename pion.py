@@ -98,31 +98,41 @@ class Pion(Sprite):
             self.y = 360
             self.position = 38
             self.changedir()
+            self.blitme()
+            pygame.display.flip()
         elif self.position == 4:
             self.x = 360
             self.y = 480
             self.position = 14
             self.changedir()
+            self.blitme()
+            pygame.display.flip()
         elif self.position == 9:
             self.x = 540
             self.y = 360
             self.position = 31
             self.changedir()
+            self.blitme()
+            pygame.display.flip()
         elif self.position == 33:
             self.x = 240
             self.y = 60
             self.position = 85
             self.changedir()
+            self.blitme()
+            pygame.display.flip()
         elif self.position == 52:
             self.x = 420
             self.y = 60
             self.position = 88
             self.changedir()
+            self.blitme()
+            pygame.display.flip()
         elif self.position == 80:
             self.x = 60
             self.y = 0
             self.position = 99
             self.changedir()
-        self.blitme()
-        pygame.display.flip()
+            self.blitme()
+            pygame.display.flip()
         self.click_position = pygame.Rect(self.x, self.y, self.rect.x, self.rect.y)
