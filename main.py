@@ -16,6 +16,7 @@ from winner_indicator import Winner
 os.environ['SDL_VIDEO_WINDOW_POS'] = "150,50"
 
 def ludoLadders():
+    # initialize pygame
     py.init()
 
     #initialize necessary assets for the game
@@ -56,28 +57,36 @@ def ludoLadders():
     blue_pions.add(pion1, pion2, pion3, pion4)
     red_pions.add(pion5, pion6, pion7, pion8)
 
+    # sets window caption
     py.display.set_caption("Ludo Ladders")
 
+    # shows an arranged and clean board before the game starts to avoid a black screen
     func.init_screen(screen, background, blue_pions, red_pions, side_panel, dice, turnbox, instruction_box)
 
+    # initialize the turn and game_status variables
     player = 1
     game_status = False
 
     while True:
         if game_status == True:
+            # this loop goes after the "Play" button in the menu is pressed and is the main loop for the game
             if player == 1:
+                # draws the turn sign and instruction
                 turnbox.turn_initiator("Blue's turn!")
                 turnbox.draw_turnbox()
                 instruction_box.instruction_change("Roll the dice!")
                 instruction_box.draw_instruction()
                 if func.check_events(dice):
+                    # rolls the dice and draws a corresponding face while changing the instruction
                     func.dice_roll(dice, blue_pions, red_pions)
                     instruction_box.instruction_change("Choose your pion!")
                     instruction_box.draw_instruction()
                     py.display.flip()
                     while True:
+                        # waits for a left mouse button click event
                         event = py.event.wait()
                         if event.type == py.MOUSEBUTTONDOWN:
+                            # which_pion checks if the mouse click happens on any of the player's 4 pions
                             if func.which_pion(pion1, pion2, pion3, pion4) == "Pion1 clicked":
                                 func.update_screen(screen, background, pion1, side_panel, dice, blue_pions, red_pions)
                                 func.check_eaten(pion1, red_pions)
@@ -94,12 +103,14 @@ def ludoLadders():
                                 func.update_screen(screen, background, pion4, side_panel, dice, blue_pions, red_pions)
                                 func.check_eaten(pion4, red_pions)
                                 break
-                    player *= -1
+                # changes the turn, remove any pions in the 100th tile and checks winning condition
+                player *= -1
                 func.remove_pion(blue_pions)
                 if func.checkwin(blue_pions, "Blue Wins!"):
                     winner.show_winner("Blue Wins!")
                     game_status = False
 
+            # this is an identical part of the loop for the second player
             elif player == -1:
                 turnbox.turn_initiator("Red's turn!")
                 turnbox.draw_turnbox()
@@ -135,16 +146,21 @@ def ludoLadders():
                     winner.show_winner("Red Wins!")
                     game_status = False
 
+            # draws the pions of each team and updates the screen
             func.draw_pions(blue_pions)
             func.draw_pions(red_pions)
             py.display.flip()
 
+        # this part of the loop allows the display of the menu screen
         elif game_status == False:
+            # draws the menu and updates the display
             menu.draw_menu()
             py.display.flip()
             while True:
+                # waits for mouse click
                 event = py.event.wait()
                 if event.type == py.MOUSEBUTTONDOWN:
+                    # checks if the "Play" button or "Quit" button has been pressed
                     if func.which_button(menu) == 1:
                         print("play")
                         game_status = True
