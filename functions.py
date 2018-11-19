@@ -1,6 +1,7 @@
 import sys
 import pygame
 
+# checks for a quit event or returns mouse position when mouse button is clicked and passing it to the roller_clicked function
 def check_events(dice):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -15,6 +16,7 @@ def which_pion(pion1, pion2, pion3, pion4):
         mouse_x, mouse_y = pygame.mouse.get_pos()
         return pion_clicked(pion1, pion2, pion3, pion4, mouse_x, mouse_y)
 
+# returns a string based on which pion is clicked
 def pion_clicked(pion1, pion2, pion3, pion4, mouse_x, mouse_y):
     pion1_clicked = pion1.click_position.collidepoint(mouse_x, mouse_y)
     pion2_clicked = pion2.click_position.collidepoint(mouse_x, mouse_y)
@@ -42,6 +44,7 @@ def update_screen(screen, background, pion, side_panel, dice, own_group, rival_g
 
     pygame.display.flip()
 
+# initiate all the sprites on the screen, including putting all pions in their base positions
 def init_screen(screen, background, blue_pions, red_pions, side_panel, dice, turnbox, instruction_box):
 
     screen.fill((255,255,255))
@@ -71,6 +74,7 @@ def init_screen(screen, background, blue_pions, red_pions, side_panel, dice, tur
 
     pygame.display.flip()
 
+# rolls and draws the dice, also redraws the pions
 def dice_roll(dice, team1, team2):
     dice.roll_dice()
     dice.draw_dice()
@@ -86,7 +90,7 @@ def checkwin(team_group, msg):
         print(msg)
         return True
 
-#checks if the roller is clicked
+#checks if the roller is clicked, returns true if it is
 def roller_clicked(dice, mouse_x, mouse_y):
     button_clicked = dice.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked:
@@ -112,10 +116,12 @@ def check_eaten(pion, rival_group):
         if members.x == pion.x and members.y == pion.y:
             members.put_in_base(members.base_position_x, members.base_position_y)
 
+# gets the mouse position and returns it to the button_clicked function
 def which_button(menu):
         mouse_x, mouse_y = pygame.mouse.get_pos()
         return button_clicked(menu, mouse_x, mouse_y)
 
+# returns an integer depending on which button is clicked
 def button_clicked(menu, mouse_x, mouse_y):
     button1 = menu.play_button_rect.collidepoint(mouse_x, mouse_y)
     button2 = menu.quit_button_rect.collidepoint(mouse_x, mouse_y)
