@@ -104,7 +104,7 @@ def ludoLadders():
                                 func.check_eaten(pion4, red_pions)
                                 break
                 # changes the turn, remove any pions in the 100th tile and checks winning condition
-                player *= -1
+                    player *= -1
                 func.remove_pion(blue_pions)
                 if func.checkwin(blue_pions, "Blue Wins!"):
                     winner.show_winner("Blue Wins!")
