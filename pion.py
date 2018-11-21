@@ -52,12 +52,10 @@ class Pion(Sprite):
                     if self.check_out():
                         self.y -= self.rect.y
                         self.changedir()
-                        print("moved up")
                         self.position += 1
                         self.adder -= 1
                     else:
                         self.x += (self.rect.x*self.direction)
-                        print("moved")
                         self.position += 1
                         self.adder -= 1
                 for pion in own_group:
@@ -69,9 +67,6 @@ class Pion(Sprite):
                 time.sleep(0.1)
             # updates the pion's new position to its clickable surface
             self.click_position = pygame.Rect(self.x, self.y, self.rect.x, self.rect.y)
-            print(self.adder)
-            print(self.position)
-            print(self.x)
         elif self.playstatus == False and self.adder == 6:
             self.change_state()
 
