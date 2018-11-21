@@ -113,7 +113,7 @@ def draw_pions(team_group):
 # returns the eaten pions to their base positions
 def check_eaten(pion, rival_group):
     for members in rival_group:
-        if members.x == pion.x and members.y == pion.y:
+        if members.x == pion.x and members.y == pion.y and members.position == pion.position:
             members.put_in_base(members.base_position_x, members.base_position_y)
 
 # gets the mouse position and returns it to the button_clicked function
