@@ -44,7 +44,7 @@ class Pion(Sprite):
     # moves the pion with a for loop to create illusion of "hopping" or changes its state and places it on the board
     def update(self, screen, background, own_group, rival_group):
         if self.playstatus == True:
-            for i in range(0, self.adder):
+            for i in range(self.adder):
                 if self.position + self.adder > 100:
                     print("break")
                     break
