@@ -53,6 +53,7 @@ class Pion(Sprite):
                         self.y -= self.rect.y
                         self.changedir()
                         self.position += 1
+                        # reduce the adder to adjust it after each step (useful when nearing 100th tile)
                         self.adder -= 1
                     else:
                         self.x += (self.rect.x*self.direction)
